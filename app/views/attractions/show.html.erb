@@ -1,15 +1,22 @@
-<h1>Edit Attraction!</h1>
+<h1>
+<label name="name"></label>
+<%= @attraction.name %><br>
+</h1>
+<label name="users">Total Number of Users: </label>
+<%= @attraction.users.count %><br>
+<label name="tickets">Ticket Price: </label>
+<%= @attraction.tickets %><br>
+<label name="nausea_rating">Nausea Rating: </label>
+<%= @attraction.nausea_rating %><br>
+<label name="happiness_rating">Happiness Rating: </label>
+<%= @attraction.happiness_rating %><br>
+<label name="min_height">Minimum Height Requirement: </label>
+<%= @attraction.min_height %><br>
 
-<%= form_for(@attraction) do |f| %>
-<%= f.label :name %><br>
-<%= f.text_field :name %><br>
-<%= f.label 'Ticket Price' %><br>
-<%= f.text_field :tickets %><br>
-<%= f.label 'Nausea Rating' %><br>
-<%= f.text_field :nausea_rating %><br>
-<%= f.label 'Happiness Rating' %><br>
-<%= f.text_field :happiness_rating %><br>
-<%= f.label 'Minimum Height Requirement' %><br>
-<%= f.text_field :min_height %><br><br>
-<%= f.submit %>
+<% if current_user.admin %>
+  <p><%= link_to 'Edit Attraction', edit_attraction_path %></p>
+<% else %>
+  <%= button_to "Go on this ride", attractions_ride_path(@attraction)%>
 <% end %>
+<br>
+<%= link_to 'Back to attractions', attractions_path %>
